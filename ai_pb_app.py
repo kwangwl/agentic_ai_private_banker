@@ -13,13 +13,14 @@ import os
 
 # Config
 try:
-    FLOW_ID = st.secrets.get("BWB_FLOW_ID")
-    FLOW_ALIAS_ID = st.secrets.get("BWB_FLOW_ALIAS_ID")
-    BEDROCK_REGION_NAME = st.secrets.get("BWB_BEDROCK_REGION_NAME")
-except FileNotFoundError:
     FLOW_ID = os.environ.get("BWB_FLOW_ID")
     FLOW_ALIAS_ID = os.environ.get("BWB_FLOW_ALIAS_ID")
     BEDROCK_REGION_NAME = os.environ.get("BWB_BEDROCK_REGION_NAME")
+except FileNotFoundError:
+    FLOW_ID = st.secrets.get("BWB_FLOW_ID")
+    FLOW_ALIAS_ID = st.secrets.get("BWB_FLOW_ALIAS_ID")
+    BEDROCK_REGION_NAME = st.secrets.get("BWB_BEDROCK_REGION_NAME")
+
 
 
 def create_pie_chart(data, chart_title=""):
