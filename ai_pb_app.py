@@ -11,6 +11,12 @@ import re
 import os
 
 
+# Config
+FLOW_ID = st.secrets.get("BWB_FLOW_ID") or os.environ.get("BWB_FLOW_ID")
+FLOW_ALIAS_ID = st.secrets.get("BWB_FLOW_ALIAS_ID") or os.environ.get("BWB_FLOW_ALIAS_ID")
+BEDROCK_REGION_NAME = st.secrets.get("BWB_BEDROCK_REGION_NAME") or os.environ.get("BWB_BEDROCK_REGION_NAME")
+
+
 def create_pie_chart(data, chart_title=""):
     """파이 차트 생성 함수"""
     fig = go.Figure(data=[go.Pie(
@@ -272,7 +278,7 @@ if submitted:
     placeholder = st.container()
 
     with st.spinner("AI가 분석 중입니다..."):
-        response = plib.get_flow_response(input_data)
+        response = plib.get_flow_response(input_data, FLOW_ID, FLOW_ALIAS_ID, BEDROCK_REGION_NAME)
 
         if response:
             placeholder.divider()
